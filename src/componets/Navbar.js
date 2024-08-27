@@ -59,12 +59,12 @@ function ResponsiveDrawer(props) {
 
   const menuItems = [
     { text: 'Home', icon: <HomeIcon />, hasSubMenu: false },
-    { text: 'Posts', icon: <PostAddIcon />, hasSubMenu: true },
+    { text: 'Posts', icon: <PostAddIcon />, hasSubMenu: true, subMenu: ['All Posts', 'Add Post', 'Categories', 'Tags'] },
     { text: 'Media', icon: <PhotoLibraryIcon />, hasSubMenu: false },
     { text: 'Pages', icon: <PagesIcon />, hasSubMenu: false },
     { text: 'Comments', icon: <CommentIcon />, hasSubMenu: false },
-    { text: 'Users', icon: <PeopleIcon />, hasSubMenu: false },
-    { text: 'Settings', icon: <SettingsIcon />, hasSubMenu: false },
+    { text: 'Users', icon: <PeopleIcon />, hasSubMenu: true , subMenu: ['All Users', 'Add New', 'Profile'] },
+    { text: 'Settings', icon: <SettingsIcon />, hasSubMenu: true, subMenu: ['Generate', 'Writing','Reading','Media','Permalinks','Privacy'] },
   ];
 
   const drawer = (
@@ -91,18 +91,11 @@ function ResponsiveDrawer(props) {
           {item.hasSubMenu && (
             <Collapse in={open[index]} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemText primary="All Posts" />
-                </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemText primary="Add Post" />
-                </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemText primary="Categories" />
-                </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemText primary="Tags" />
-                </ListItemButton>
+                {item.subMenu.map((subMenuItem) => (
+                  <ListItemButton key={subMenuItem} sx={{ pl: 4 }}>
+                    <ListItemText primary={subMenuItem} />
+                  </ListItemButton>
+                ))}
               </List>
             </Collapse>
           )}
