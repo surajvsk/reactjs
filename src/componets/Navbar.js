@@ -16,11 +16,22 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import {Collapse } from '@mui/material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import HomeIcon from '@mui/icons-material/Home';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import PagesIcon from '@mui/icons-material/Pages';
+import CommentIcon from '@mui/icons-material/Comment';
+import PeopleIcon from '@mui/icons-material/People';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
   const { window } = props;
+  const [open, setOpen] = React.useState({});
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 
@@ -39,35 +50,65 @@ function ResponsiveDrawer(props) {
     }
   };
 
+  const handleClick = (index) => {
+    setOpen((prevOpen) => ({
+      ...prevOpen,
+      [index]: !prevOpen[index],
+    }));
+  };
+
+  const menuItems = [
+    { text: 'Home', icon: <HomeIcon />, hasSubMenu: false },
+    { text: 'Posts', icon: <PostAddIcon />, hasSubMenu: true },
+    { text: 'Media', icon: <PhotoLibraryIcon />, hasSubMenu: false },
+    { text: 'Pages', icon: <PagesIcon />, hasSubMenu: false },
+    { text: 'Comments', icon: <CommentIcon />, hasSubMenu: false },
+    { text: 'Users', icon: <PeopleIcon />, hasSubMenu: false },
+    { text: 'Settings', icon: <SettingsIcon />, hasSubMenu: false },
+  ];
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <List>
-        {['Add Company', 'Invoice'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton className='ListButton'>
+      {menuItems.map((item, index) => (
+        <React.Fragment key={item.text}>
+          <ListItem disablePadding>
+            <ListItemButton
+              className='ListButton'
+              indicatorColor="secondary"
+              textColor="secondary"
+              onClick={() => item.hasSubMenu && handleClick(index)}
+            >
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {item.icon}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.text} />
+              {item.hasSubMenu && (open[index] ? <ExpandLess /> : <ExpandMore />)}
             </ListItemButton>
           </ListItem>
-        ))}
-      </List>
-      {/* <Divider /> */}
-      {/* <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
+          {item.hasSubMenu && (
+            <Collapse in={open[index]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemText primary="All Posts" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemText primary="Add Post" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemText primary="Categories" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemText primary="Tags" />
+                </ListItemButton>
+              </List>
+            </Collapse>
+          )}
+        </React.Fragment>
+      ))}
+    </List>
     </div>
   );
 
@@ -95,7 +136,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
