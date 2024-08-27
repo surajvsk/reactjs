@@ -60,8 +60,8 @@ function ResponsiveDrawer(props) {
   const menuItems = [
     { text: 'Home', icon: <HomeIcon />, hasSubMenu: false },
     { text: 'Posts', icon: <PostAddIcon />, hasSubMenu: true, subMenu: ['All Posts', 'Add Post', 'Categories', 'Tags'] },
-    { text: 'Media', icon: <PhotoLibraryIcon />, hasSubMenu: false },
-    { text: 'Pages', icon: <PagesIcon />, hasSubMenu: false },
+    { text: 'Media', icon: <PhotoLibraryIcon />, hasSubMenu: true, subMenu: ['Library', 'Add New'] },
+    { text: 'Pages', icon: <PagesIcon />, hasSubMenu: true , subMenu: ['All Pages', 'Add New'] },
     { text: 'Comments', icon: <CommentIcon />, hasSubMenu: false },
     { text: 'Users', icon: <PeopleIcon />, hasSubMenu: true , subMenu: ['All Users', 'Add New', 'Profile'] },
     { text: 'Settings', icon: <SettingsIcon />, hasSubMenu: true, subMenu: ['Generate', 'Writing','Reading','Media','Permalinks','Privacy'] },
