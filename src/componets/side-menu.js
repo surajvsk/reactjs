@@ -25,6 +25,8 @@ import CommentIcon from '@mui/icons-material/Comment';
 import PeopleIcon from '@mui/icons-material/People';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
+
+
 const drawerWidth = 240;
 
 function Sidebar(props) {
@@ -198,7 +200,7 @@ function Sidebar(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Typography paragraph   sx={{
+        {/* <Typography paragraph   sx={{
         textAlign: 'justify',
         display: 'flex',
         justifyContent: 'center',
@@ -228,7 +230,7 @@ function Sidebar(props) {
           feugiat vivamus at augue. At augue eget arcu dictum varius duis at
           consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
           sapien faucibus et molestie ac.
-        </Typography>
+        </Typography> */}
       </Box>
     </Box>
   );

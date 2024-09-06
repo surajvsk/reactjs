@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import Layout from './Layout';
 class mComments extends Component {
     render() {
-        return <div>Welcome to the mComments Page</div>;
+        return <Layout>
+        This is the contact page content. Feel free to reach out to us via the
+        provided contact information.
+      </Layout>;
     }
   };
 
